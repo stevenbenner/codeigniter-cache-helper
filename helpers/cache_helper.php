@@ -9,10 +9,32 @@
  * @category	Helpers
  * @author		Steven Benner
  * @link		http://stevenbenner.com/2010/12/caching-with-codeigniter-zen-headaches-and-perfomance/
- * @version		1.3
+ * @link		https://bitbucket.org/stevenbenner/codeigniter-cache-helper
+ * @version		1.4
  */
 
-// NOTE: This code is for CodeIgniter 2.0. For CI < 1.7.x replace APPPATH with BASEPATH
+// NOTE: This code is for CodeIgniter 2.0. For CI 1.7 or older replace APPPATH with BASEPATH
+
+/**
+ * Get Cache Folder
+ *
+ * Gets the path to the application cache folder.
+ *
+ * @author	Steven Benner
+ * @return	string	Path to the cache folder.
+ */
+if ( ! function_exists('get_cache_folder'))
+{
+	function get_cache_folder()
+	{
+		$CI =& get_instance();
+
+		$path = $CI->config->item('cache_path');
+		$cache_path = ($path == '') ? APPPATH . 'cache/' : $path;
+
+		return $cache_path;
+	}
+}
 
 /**
  * Get Cache File
@@ -29,15 +51,11 @@ if ( ! function_exists('get_cache_file'))
 	{
 		$CI =& get_instance();
 
-		$path = $CI->config->item('cache_path');
-
-		$cache_path = ($path == '') ? APPPATH . 'cache/' : $path;
-
 		$uri =  $CI->config->item('base_url') .
 				$CI->config->item('index_page') .
 				$uri_string;
 
-		return $cache_path . md5($uri);
+		return get_cache_folder() . md5($uri);
 	}
 }
 
@@ -47,7 +65,7 @@ if ( ! function_exists('get_cache_file'))
  * Gets the path to every cache file currently saved.
  *
  * @author	Steven Benner
- * @return	array	Array of cache file paths.
+ * @return	array	get_dir_file_info() of cache files.
  */
 if ( ! function_exists('get_all_cache_files'))
 {
@@ -57,11 +75,7 @@ if ( ! function_exists('get_all_cache_files'))
 
 		$CI->load->helper('file');
 
-		$path = $CI->config->item('cache_path');
-
-		$cache_path = ($path == '') ? APPPATH . 'cache/' : $path;
-
-		return get_filenames($cache_path);
+		return get_dir_file_info(get_cache_folder());
 	}
 }
 
@@ -108,11 +122,67 @@ if ( ! function_exists('delete_all_cache'))
 
 		foreach ($cache_files as $file)
 		{
-			// only delete files with names that are 32
-			// characters in length (MD5)
-			if (strlen($file) === 32)
+			// only delete files with names that are 32 characters in length (MD5)
+			if (strlen($file['name']) === 32 && is_really_writable($file['server_path']))
 			{
-				@unlink($cache_path . $file);
+				@unlink($file['server_path']);
+			}
+		}
+	}
+}
+
+/**
+ * Delete Expired Cache
+ *
+ * Delete all expired cache files. This is a fairly expensive function so it
+ * should not be called on every hit.
+ *
+ * @author	Steven Benner
+ * @return	void
+ */
+if ( ! function_exists('delete_expired_cache'))
+{
+	function delete_expired_cache()
+	{
+		$CI =& get_instance();
+
+		$CI->load->helper('file');
+
+		$files = get_dir_file_info(get_cache_folder());
+
+		foreach ($files as $file)
+		{
+			if (strlen($file['name']) !== 32)
+			{
+				continue;
+			}
+
+			if ( ! $fp = @fopen($file['server_path'], FOPEN_READ))
+			{
+				continue;
+			}
+
+			flock($fp, LOCK_SH);
+
+			$time_str = '';
+			while (($char = fgetc($fp)) !== FALSE)
+			{
+				if ($char === 'T')
+				{
+					break;
+				}
+				$time_str .= $char;
+			}
+
+			flock($fp, LOCK_UN);
+			fclose($fp);
+
+			if (ctype_digit($time_str) && time() >= (int)$time_str)
+			{
+				if (is_really_writable($file['server_path']))
+				{
+					@unlink($file['server_path']);
+				}
 			}
 		}
 	}
