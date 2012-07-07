@@ -8,19 +8,15 @@
  *
  * @category	Helpers
  * @author		Steven Benner
- * @link		http://stevenbenner.com/2010/12/caching-with-codeigniter-zen-headaches-and-perfomance/
- * @link		https://bitbucket.org/stevenbenner/codeigniter-cache-helper
+ * @link		https://github.com/stevenbenner/codeigniter-cache-helper
  * @version		1.4
  */
-
-// NOTE: This code is for CodeIgniter 2.0. For CI 1.7 or older replace APPPATH with BASEPATH
 
 /**
  * Get Cache Folder
  *
  * Gets the path to the application cache folder.
  *
- * @author	Steven Benner
  * @return	string	Path to the cache folder.
  */
 if ( ! function_exists('get_cache_folder'))
@@ -41,7 +37,6 @@ if ( ! function_exists('get_cache_folder'))
  *
  * Gets the path to a cache file for the specified uri_string().
  *
- * @author	Steven Benner
  * @param	string	Full uri_string() of the target page (e.g. '/blog/comments/123')
  * @return	string	Path to the cache file.
  */
@@ -64,7 +59,6 @@ if ( ! function_exists('get_cache_file'))
  *
  * Gets the path to every cache file currently saved.
  *
- * @author	Steven Benner
  * @return	array	get_dir_file_info() of cache files.
  */
 if ( ! function_exists('get_all_cache_files'))
@@ -85,7 +79,6 @@ if ( ! function_exists('get_all_cache_files'))
  *
  * Evicts the output cache for the targeted page.
  *
- * @author	Steven Benner
  * @param	string	Full uri_string() of the target page (e.g. '/blog/comments/123')
  * @return	boolean	TRUE if the cache file was removed, FALSE if it was not
  */
@@ -111,7 +104,6 @@ if ( ! function_exists('delete_cache'))
  *
  * Evicts the output cache for all pages currently cached.
  *
- * @author	Steven Benner
  * @return	void
  */
 if ( ! function_exists('delete_all_cache'))
@@ -137,7 +129,6 @@ if ( ! function_exists('delete_all_cache'))
  * Delete all expired cache files. This is a fairly expensive function so it
  * should not be called on every hit.
  *
- * @author	Steven Benner
  * @return	void
  */
 if ( ! function_exists('delete_expired_cache'))
@@ -193,7 +184,6 @@ if ( ! function_exists('delete_expired_cache'))
  *
  * Gets the expiration time for a cache file. Time strings are in time() format.
  *
- * @author	Steven Benner
  * @param	string	$uri_string	Full uri_string() of the target page
  * @return	mixed	Time from the cache file or FALSE if there was a problem
  */
