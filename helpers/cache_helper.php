@@ -9,7 +9,8 @@
  * @category	Helpers
  * @author		Steven Benner
  * @link		https://github.com/stevenbenner/codeigniter-cache-helper
- * @version		1.4
+ * @license		MIT License
+ * @version		1.4.1
  */
 
 /**
