@@ -3,19 +3,36 @@
 I am a huge fan of output caching and CodeIgniter has a very effective output caching system, however, it is lacking some very important functions for managing the cache files. CodeIgniter Cache Helper fixes that issue by giving you a simple helper that you can add to your CodeIgniter project that will let you manage your output cache files in code.
 
 ## Requirements
+
 * CodeIgniter 2.0+ (It can be modified to work in <1.7.2 by changing "APPPATH" to "BASEPATH")
 
 ## Installation
+
+### Manual installation
+
 Add the cache_helper.php file to your "helpers" directory in the application folder.
 
+### Spark installation
+
+This helper can be installed and run as a [spark](http://getsparks.org/). Install the current version with this command:
+
+`php tools\spark install -v1.4.1 cache-helper`
+
 ## Usage
-Load the helper any time you want to use one of it's functions
+
+Load the helper any time you want to use its functions. You can then call any of the functions directly. Helper functions do not need to be called through CodeIgniter's `$this` object.
+
+### For manual install
 
 ```php
 $this->load->helper('cache');
 ```
 
-You can then call any of the functions directly. Helper functions do not need to be called through CodeIgniter's `$this` object.
+### For spark install
+
+```php
+$this->load->spark('cache-helper/1.4.1');
+```
 
 ## Function reference
 
@@ -78,6 +95,7 @@ Attempts to read the expiration time stamp from the cache file for the specified
 * Call this function with the URI string of the resource you are looking for (e.g. 'blog/article/123'). This is designed to be used with CodeIgniter's `uri_string()` method from the [URI Class](http://codeigniter.com/user_guide/libraries/uri.html).
 
 ## License
+
 *(This project is released under the MIT license.)*
 
 Copyright (c) 2012 Steven Benner, http://stevenbenner.com/
