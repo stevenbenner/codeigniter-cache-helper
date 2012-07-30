@@ -36,63 +36,19 @@ $this->load->spark('cache-helper/1.4.1');
 
 ## Function reference
 
-### get_cache_folder()
+| Function | Return | Description |
+| ----- | ----- | ----- |
+| `get_cache_folder()` | string | Returns a string containing the path to the cache directory. (e.g. `'/var/www/application/cache'`) |
+| `get_cache_file($uri_string)` | string | Returns a string with the path to the cache file for a specific URI. (e.g. `'/var/www/application/cache/d41d8cd98f00b204e9800998ecf8427e'`) This function does not check for the existence of that cache file, it merely tells you where CodeIgniter would cache that resource. |
+| `get_all_cache_files()` | array | Returns an object containing information for every file in the cache directory. Uses the `get_dir_file_info()` function from the [File Helper](http://codeigniter.com/user_guide/helpers/file_helper.html). The returned object will be in that format. |
+| `delete_cache($uri_string)` | bool | Attempts to delete the cached file for the specified resource. Returns `TRUE` upon success or if that file does not exist, returns `FALSE` on failure. |
+| `delete_all_cache()` | void | Attempts to delete ALL cache files. Does not return anything. |
+| `delete_expired_cache()` | void | Attempts to delete all cache files which have expired. Does not return anything. |
+| `get_cache_expiration($uri_string)` | int | Attempts to read the expiration time stamp from the cache file for the specified resource. Returns an integer with the time stamp (UNIX time stamp in `time()` format, e.g. `1307158229`) if it could find and parse the file, returns `FALSE` if there is no cache file for the resource or if there was a problem reading/parsing the file. |
 
-Returns a string containing the path to the cache directory.
+**Notes**
 
-#### Example return
-
-`'/var/www/application/cache'`
-
-### get_cache_file($uri_string)
-
-Returns a string with the path to the cache file for a specific URI.
-
-#### Notes
-
-* Call this function with the URI string of the resource you are looking for (e.g. 'blog/article/123'). This is designed to be used with CodeIgniter's `uri_string()` method from the [URI Class](http://codeigniter.com/user_guide/libraries/uri.html).
-
-* This function does not check for the existence of that cache file, it merely tells you where CodeIgniter would cache the file.
-
-#### Example return
-
-`'/var/www/application/cache/d41d8cd98f00b204e9800998ecf8427e'`
-
-### get_all_cache_files()
-
-Returns an object containing information for every file in the cache directory.
-
-#### Notes
-
-* Uses the `get_dir_file_info()` function from the [File Helper](http://codeigniter.com/user_guide/helpers/file_helper.html). The returned object will be in that format.
-
-### delete_cache($uri_string)
-
-Attempts to delete the cached file for the specified resource. Returns `TRUE` upon success or if that file does not exist, returns `FALSE` on failure.
-
-#### Notes
-
-* Call this function with the URI string of the resource you are looking for (e.g. 'blog/article/123'). This is designed to be used with CodeIgniter's `uri_string()` method from the [URI Class](http://codeigniter.com/user_guide/libraries/uri.html).
-
-### delete_all_cache()
-
-Attempts to delete ALL cache files. Does not return anything.
-
-### delete_expired_cache()
-
-Attempts to delete all cache files which have expired. Does not return anything.
-
-#### Notes
-
-* This function will iterate through every file in the cache directory and try to read the expiration time from the file. If you have a large cache directory and/or slow I/O then this can be a slow operation.
-
-### get_cache_expiration($uri_string)
-
-Attempts to read the expiration time stamp from the cache file for the specified resource. Returns an integer with the time stamp (UNIX time stamp in `time()` format) if it could find and parse the file, returns `FALSE` if there is no cache file for the resource or if there was a problem reading/parsing the file.
-
-#### Notes
-
-* Call this function with the URI string of the resource you are looking for (e.g. 'blog/article/123'). This is designed to be used with CodeIgniter's `uri_string()` method from the [URI Class](http://codeigniter.com/user_guide/libraries/uri.html).
+* The `$uri_string` argument is the URI string of the resource you are looking for (e.g. `'blog/article/123'`). This is designed to be used with CodeIgniter's `uri_string()` method from the [URI Class](http://codeigniter.com/user_guide/libraries/uri.html).
 
 ## License
 
