@@ -6,11 +6,11 @@
  * Utility functions for working with CodeIgniter's output cache.
  * All code based on or directly copied from CodeIgniter.
  *
- * @category	Helpers
- * @author		Steven Benner
- * @link		https://github.com/stevenbenner/codeigniter-cache-helper
- * @license		MIT License
- * @version		1.4.1
+ * @category Helpers
+ * @author   Steven Benner (http://stevenbenner.com/)
+ * @link     https://github.com/stevenbenner/codeigniter-cache-helper
+ * @license  MIT License
+ * @version  1.4.1
  */
 
 /**
@@ -18,7 +18,7 @@
  *
  * Gets the path to the application cache folder.
  *
- * @return	string	Path to the cache folder.
+ * @return string Path to the cache folder.
  */
 if ( ! function_exists('get_cache_folder'))
 {
@@ -38,8 +38,8 @@ if ( ! function_exists('get_cache_folder'))
  *
  * Gets the path to a cache file for the specified uri_string().
  *
- * @param	string	Full uri_string() of the target page (e.g. '/blog/comments/123')
- * @return	string	Path to the cache file.
+ * @param  string $uri_string Full uri_string() of the target page (e.g. '/blog/comments/123').
+ * @return string Path to the cache file.
  */
 if ( ! function_exists('get_cache_file'))
 {
@@ -60,7 +60,7 @@ if ( ! function_exists('get_cache_file'))
  *
  * Gets the path to every cache file currently saved.
  *
- * @return	array	get_dir_file_info() of cache files.
+ * @return array get_dir_file_info() of cache files.
  */
 if ( ! function_exists('get_all_cache_files'))
 {
@@ -80,8 +80,8 @@ if ( ! function_exists('get_all_cache_files'))
  *
  * Evicts the output cache for the targeted page.
  *
- * @param	string	Full uri_string() of the target page (e.g. '/blog/comments/123')
- * @return	boolean	TRUE if the cache file was removed, FALSE if it was not
+ * @param  string  $uri_string Full uri_string() of the target page (e.g. '/blog/comments/123').
+ * @return boolean TRUE if the cache file was removed, FALSE if it was not.
  */
 if ( ! function_exists('delete_cache'))
 {
@@ -105,7 +105,7 @@ if ( ! function_exists('delete_cache'))
  *
  * Evicts the output cache for all pages currently cached.
  *
- * @return	void
+ * @return void
  */
 if ( ! function_exists('delete_all_cache'))
 {
@@ -130,7 +130,7 @@ if ( ! function_exists('delete_all_cache'))
  * Delete all expired cache files. This is a fairly expensive function so it
  * should not be called on every hit.
  *
- * @return	void
+ * @return void
  */
 if ( ! function_exists('delete_expired_cache'))
 {
@@ -185,8 +185,8 @@ if ( ! function_exists('delete_expired_cache'))
  *
  * Gets the expiration time for a cache file. Time strings are in time() format.
  *
- * @param	string	$uri_string	Full uri_string() of the target page
- * @return	mixed	Time from the cache file or FALSE if there was a problem
+ * @param  string $uri_string Full uri_string() of the target page.
+ * @return mixed  Time from the cache file or FALSE if there was a problem.
  */
 if ( ! function_exists('get_cache_expiration'))
 {
