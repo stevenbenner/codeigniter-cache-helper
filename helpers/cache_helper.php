@@ -38,7 +38,7 @@ if ( ! function_exists('get_cache_folder'))
  *
  * Gets the path to a cache file for the specified uri_string().
  *
- * @param  string $uri_string Full uri_string() of the target page (e.g. '/blog/comments/123').
+ * @param  string $uri_string Full uri_string() of the target page (e.g. 'blog/comments/123').
  * @return string Path to the cache file.
  */
 if ( ! function_exists('get_cache_file'))
@@ -80,7 +80,7 @@ if ( ! function_exists('get_all_cache_files'))
  *
  * Evicts the output cache for the targeted page.
  *
- * @param  string  $uri_string Full uri_string() of the target page (e.g. '/blog/comments/123').
+ * @param  string  $uri_string Full uri_string() of the target page (e.g. 'blog/comments/123').
  * @return boolean TRUE if the cache file was removed, FALSE if it was not.
  */
 if ( ! function_exists('delete_cache'))
