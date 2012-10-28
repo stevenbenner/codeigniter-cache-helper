@@ -16,7 +16,7 @@ Add the cache_helper.php file to your "helpers" directory in the application fol
 
 This helper can be installed and run as a [spark](http://getsparks.org/). Install the current version with this command:
 
-`php tools\spark install -v1.4.1 cache-helper`
+`php tools\spark install -v1.4.2 cache-helper`
 
 ## Usage
 
@@ -31,7 +31,7 @@ $this->load->helper('cache');
 ### For spark install
 
 ```php
-$this->load->spark('cache-helper/1.4.1');
+$this->load->spark('cache-helper/1.4.2');
 ```
 
 ## Function reference
